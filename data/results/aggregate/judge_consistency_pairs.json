@@ -1,0 +1,122 @@
+[
+  {
+    "index": 2,
+    "question": "What does it mean when a claim is 'pended' during adjudication?",
+    "answer": "When a claim is 'pended' during adjudication, it means that the claim cannot be automatically processed and requires manual review [Pend]. \n\nDuring the adjudication process, claims are evaluated against plan rules to determine one of three outcomes: pay, deny, or pend [Adjudication]. When the rules engine completes its evaluation, it emits a Claim Adjudicated Event with a PAY, DENY, or PEND disposition [Claim Adjudicated Event]. The logic for determining these outcomes is governed by Adjudication Disposition Rules [Adjudication Disposition Rules].\n\nWhen a claim receives a PEND disposition, it is routed to the Claims Adjudicator Queue for manual review by senior claims staff [Claims Adjudicator Queue]. This queue is fed by the rules engine and staffed by claims operations personnel [Claims Adjudicator Queue].\n\nThe pend status is significant in the context of auto-adjudication performance, as the system targets an 85% auto-adjudication rate with alerts when it drops below 75% [Auto-Adjudication Rate Targets]. Claims that are pended contribute to reducing this auto-adjudication rate since they require human intervention rather than automated processing.",
+    "original_score": "answerable",
+    "original_ddc": "CLEAN",
+    "topic": "claim status"
+  },
+  {
+    "index": 14,
+    "question": "Which system generates the 835 remittance advice files?",
+    "answer": "Based on the provided domain knowledge entities, the **Payment Engine** system generates the 835 remittance advice files [ERA 835].\n\nThe ERA 835 (Electronic Remittance Advice) format provides payment details to healthcare providers [ERA 835], and it is produced by the payment-engine [ERA 835]. The Payment Engine is described as a system that processes adjudicated claims into payments via EFT and handles remittance advice [Payment Engine].\n\nThe system is owned by claims-operations [Payment Engine] and exposes a Payment API that provides access to payment history, remittance advice, and payment holds [Payment API]. Additionally, there are improvements in place where ERA 835 generation can be delayed until settlement confirmation to address timing mismatch problems in payment reconciliation [ERA 835 Settlement Confirmation].",
+    "original_score": "answerable",
+    "original_ddc": "CLEAN",
+    "topic": "payment processing"
+  },
+  {
+    "index": 4,
+    "question": "What is the difference between an ERA and an EOB?",
+    "answer": "Based on the provided entities, here are the key differences between an ERA and an EOB:\n\n**Purpose and Audience:**\n- ERA 835 is an electronic remittance advice format that provides payment details to healthcare providers [ERA 835]\n- EOB is an Explanation of Benefits document that members receive showing what was covered [EOB]\n\n**Recipients:**\n- ERA 835 is sent to healthcare providers to inform them about payments\n- EOB is sent to plan members to explain their benefits and coverage\n\n**Content Focus:**\n- ERA 835 focuses on payment information for providers [ERA 835]\n- EOB focuses on explaining benefit coverage to members [EOB]\n\n**System Integration:**\n- ERA 835 is produced by the payment-engine and contracts with the payment-api [ERA 835]\n- EOB is used in the member-portal and is produced through an automated EOB Generation Process [EOB, EOB Generation Process]\n\n**Processing:**\n- ERA 835 is part of the payment reconciliation process and can have timing mismatch problems with actual settlement amounts [ERA 835 Timing Mismatch Problem]\n- EOB generation is triggered by the claims-processing-workflow and uses the member-portal [EOB Generation Process]\n\nIn essence, ERA 835 is a provider-facing payment document, while EOB is a member-facing benefits explanation document.",
+    "original_score": "answerable",
+    "original_ddc": "CLEAN",
+    "topic": "payment documents"
+  },
+  {
+    "index": 29,
+    "question": "Who is responsible for keeping provider credentials up to date?",
+    "answer": "Based on the provided entities, responsibility for keeping provider credentials up to date is shared between multiple parties:\n\n**Primary Responsibility:**\n- **Provider Network team** - This team owns the overall credentialing process and systems [Provider Network], [Provider Re-credentialing Process], [Provider Directory], [Provider Self-Service Portal]\n- **James Whitfield** - As the Provider Network team lead, he is specifically responsible for provider directory and credentialing [James Whitfield]\n\n**Operational Responsibility:**\n- **Credentialing Specialist** - Internal user who reviews credentialing document submissions and manages re-credentialing workflows [Credentialing Specialist]\n- **Clearview Provider Relations Rep** - Reviews and approves provider-submitted changes through the portal [Clearview Provider Relations Rep]\n\n**Provider Responsibility:**\n- **Provider Office Manager** - Handles administrative tasks at provider offices, including updating credentials through the self-service portal [Provider Office Manager]\n- **Providers themselves** - Can update certain credential information through the Provider Self-Service Portal, though some changes require manual review per business rules [Provider Data Update Restrictions]\n\nThe process involves a **required re-credentialing every 3 years per NCQA standards** [Provider Re-credentialing Process], with updates propagated across downstream systems within 2 hours [Credentialing Status Propagation].",
+    "original_score": "answerable",
+    "original_ddc": "CLEAN",
+    "topic": "Provider Data"
+  },
+  {
+    "index": 12,
+    "question": "How many members does Clearview Health Plans cover?",
+    "answer": "Based on the provided entities, Clearview Health Plans covers approximately 800,000 members across three states [Clearview Health Plans]. This information is corroborated by the Members Table entity, which stores member enrollment data with approximately 800K rows [Members Table].",
+    "original_score": "answerable",
+    "original_ddc": "CLEAN",
+    "topic": "company size"
+  },
+  {
+    "index": 21,
+    "question": "What information does the Provider Directory maintain about contracted providers?",
+    "answer": "Based on the provided entities, the Provider Directory maintains several types of information about contracted providers:\n\n**Core Provider Information:**\n- Provider credentials and network participation status [Provider]\n- Provider demographics [Provider Directory]\n- National Provider Identifier (NPI) as the unique identifier [NPI]\n\n**Financial Information:**\n- Fee schedules defining contracted allowed amounts for procedure codes by provider contract [Fee Schedule]\n\n**Status and Credentialing Information:**\n- Network status information [Provider Status Changed Event]\n- Credentialing status, which is subject to re-verification every 3 years per NCQA standards [Provider Re-credentialing Process]\n\n**System Integration:**\nThe Provider Directory serves as the master data system for this contracted provider information [Provider Directory] and publishes events when provider information or network status changes [Provider Status Changed Event]. This information is used by multiple downstream systems including the rules engine, member portal, and fraud detection systems [Provider], [Denormalized Provider Profiles].\n\nThe directory also supports provider search functionality through Elasticsearch integration [Elasticsearch] and allows providers to manage their own information through the Provider Self-Service Portal [Provider Self-Service Portal].\n\nHowever, the entities do not provide specific details about what demographic fields, credential types, or other specific data elements are maintained beyond these high-level categories.\n\nPARTIAL\n\nThe context provides a good overview of the types of information maintained (credentials, demographics, network status, fee schedules, credentialing status) but lacks specific details about the actual data fields, credential types, demographic elements, or the complete data schema of the Provider Directory.",
+    "original_score": "partial",
+    "original_ddc": "INCOMPLETE",
+    "topic": "provider data"
+  },
+  {
+    "index": 10,
+    "question": "What types of claim submission formats does the Claims Gateway accept?",
+    "answer": "Based on the provided entities, I can identify that the Claims Gateway accepts claim submissions through multiple channels, but specific format details are limited.\n\nThe Claims Gateway accepts claims through the following submission methods:\n\n1. **REST API submissions** - The Claims Gateway exposes REST APIs for claim submission, including the current Claims Submission API v2 and the deprecated Claims Submission API v1 [Claims Submission API], [Claims Submission API v1], [Claims Submission API v2].\n\n2. **Paper claims via OCR** - The Claims Gateway receives structured data from paper claims that have been processed through an OCR Pipeline, which handles fax and mail submissions by extracting structured data via OCR and routing it to the Claims Gateway [OCR Pipeline].\n\nThe system validates the format of incoming claims as part of its core functionality, as the Claims Gateway \"receives all incoming claims, validates format, checks duplicates, and routes downstream\" [Claims Gateway]. When claims are successfully received and validated, a Claim Submitted Event is triggered [Claim Submitted Event].\n\nHowever, the entities do not specify the exact technical formats (such as specific JSON schemas, XML formats, EDI standards, or other structured data formats) that these submission channels accept.\n\n**PARTIAL**\n\nThe context provides information about the submission channels (REST APIs and OCR-processed paper claims) but lacks specific details about the actual data formats, schemas, or standards (like EDI, JSON structure, XML schemas) that the Claims Gateway accepts for claim submissions.",
+    "original_score": "partial",
+    "original_ddc": "INCOMPLETE",
+    "topic": "gateway inputs"
+  },
+  {
+    "index": 47,
+    "question": "How does the Claims Gateway determine whether an incoming claim is a duplicate?",
+    "answer": "Based on the provided entities, the Claims Gateway determines whether an incoming claim is a duplicate through the following process:\n\nWhen a claim is submitted, it triggers the [Claim Submitted Event], which in turn [triggers \u2192 duplicate-detection-process]. The [Duplicate Detection Process] is [executed_by \u2192 claims-gateway] and uses [composite key matching] to identify potential duplicates [Duplicate Detection Process].\n\nThe duplicate detection uses [Duplicate Detection Logic], which implements [composite key matching logic to identify duplicate claims within 90-day window] [Duplicate Detection Logic]. This logic is [enforced_by \u2192 claims-gateway] and is [part_of \u2192 duplicate-detection-process] [Duplicate Detection Logic].\n\nThe composite key matching [involves \u2192 member-id] and [involves \u2192 npi] [Duplicate Detection Process], meaning the system likely uses a combination of the member ID and National Provider Identifier as part of its duplicate detection criteria.\n\nHowever, the entities do not provide complete details about:\n- What other fields beyond member-id and npi are included in the composite key\n- The exact matching algorithm or criteria used\n- How the 90-day window is applied in practice\n- What happens when a duplicate is detected (blocking, flagging, etc.)",
+    "original_score": "partial",
+    "original_ddc": "INCOMPLETE",
+    "topic": "duplicate detection"
+  },
+  {
+    "index": 3,
+    "question": "How does the Rules Engine determine whether to pay, deny, or pend a claim?",
+    "answer": "Based on the provided entities, the Rules Engine determines claim dispositions through the following process:\n\nThe Rules Engine evaluates claims through **adjudication**, which is the process of evaluating a claim against plan rules to decide pay/deny/pend [Adjudication]. This evaluation is governed by **Adjudication Disposition Rules**, which contain the logic determining PAY/DENY/PEND outcomes from rules engine evaluation [Adjudication Disposition Rules].\n\nDuring this process, the Rules Engine applies several types of business rules:\n\n1. **Point-in-Time Eligibility Rules** - validates member eligibility with historical lookups and date validation [Point-in-Time Eligibility Rules]\n\n2. **Coordination of Benefits Logic** - determines payer order and calculates secondary payer responsibility using rules like the birthday rule and active/retired rule [Coordination of Benefits Logic] [COB Payer Order Rules]\n\n3. **Allowed Amount Calculation** - calculates the maximum payable amount based on provider contract fee schedules [Allowed Amount Calculation]\n\nThe three possible outcomes are:\n- **PAY** - when the claim passes all rules validation\n- **DENY** - when the claim fails rules validation  \n- **PEND** - when a claim can't be auto-adjudicated and needs manual review [Pend]\n\nOnce the Rules Engine completes its evaluation, it produces a **Claim Adjudicated Event** with the determined PAY, DENY, or PEND disposition [Claim Adjudicated Event].\n\nHowever, the entities do not provide specific details about the exact decision logic, thresholds, or criteria that determine which outcome is selected, nor do they explain the internal workflow of how these rules are prioritized or sequenced during evaluation.",
+    "original_score": "partial",
+    "original_ddc": "INCOMPLETE",
+    "topic": "adjudication logic"
+  },
+  {
+    "index": 26,
+    "question": "What happens when the Rules Engine determines a claim should be pended?",
+    "answer": "Based on the provided entities, when the Rules Engine determines a claim should be pended, the following happens:\n\n1. **Pend Decision**: The claim cannot be auto-adjudicated and is marked for manual review [Pend]. This occurs when the Rules Engine's evaluation through the [Adjudication Disposition Rules] results in a PEND outcome rather than PAY or DENY.\n\n2. **Event Emission**: A Claim Adjudicated Event is published with the PEND disposition [Claim Adjudicated Event]. This event is consumed by downstream systems including the payment engine and member portal.\n\n3. **Queue Assignment**: The pended claim is routed to the Claims Adjudicator Queue for manual review by senior claims staff from the claims operations team [Claims Adjudicator Queue].\n\nThe process follows the standard adjudication workflow where the [Rules Engine] evaluates claims against benefit plans, fee schedules, and medical policies, but when automatic determination isn't possible, manual intervention is required through the staffed review queue.\n\nHowever, the entities don't provide specific details about what happens within the manual review process itself, the timeframes involved, or the specific criteria that trigger a PEND decision versus PAY/DENY outcomes.",
+    "original_score": "partial",
+    "original_ddc": "INCOMPLETE",
+    "topic": "Claim Adjudication"
+  },
+  {
+    "index": 33,
+    "question": "What validation does the Claims Gateway perform before routing claims downstream?",
+    "answer": "Based on the provided entities, the Claims Gateway performs several types of validation before routing claims downstream:\n\n**Format and Basic Validation:**\nThe Claims Gateway \"validates format, checks duplicates, and routes downstream\" [Claims Gateway]. This indicates basic structural validation of incoming claims.\n\n**API Version-Specific Validation:**\n- **Claims API v2**: Implements \"synchronous validation in Claims Submission API v2 that rejects invalid claims immediately\" [Claims API v2 Validation Logic]\n- **Claims API v1**: Uses an \"asynchronous validation approach in Claims Submission API v1 that accepts invalid claims\" [Claims API v1 Validation Logic]\n\n**Fraud Detection Integration:**\nThe system includes fraud scoring as part of validation, with a migration happening from asynchronous to synchronous fraud detection. The \"Fraud Detection Pre-Payment Integration\" represents a \"migration from asynchronous to synchronous fraud scoring in Claims Gateway intake flow\" [Fraud Detection Pre-Payment Integration].\n\n**Event Publishing After Validation:**\nOnce validation is complete, the gateway publishes a \"Kafka event published when Claims Gateway receives and validates a new claim submission\" [Claim Submitted Event (Kafka)], indicating that validation occurs before this event is triggered.\n\n**OCR-Processed Claims:**\nFor claims coming from the OCR Pipeline, there are \"business rules for routing claims based on OCR extraction confidence levels and field accuracy\" [OCR Confidence Scoring Rules] that influence validation decisions.\n\nHowever, the entities do not provide specific details about what constitutes valid format, what duplicate checking algorithms are used, or the specific validation rules applied beyond fraud detection.",
+    "original_score": "partial",
+    "original_ddc": "INCOMPLETE",
+    "topic": "Gateway Validation"
+  },
+  {
+    "index": 42,
+    "question": "How many members does Clearview cover and across which geographic area?",
+    "answer": "Based on the provided entities, Clearview covers approximately **800,000 members** across **three states**.\n\nThe member count is supported by two consistent sources:\n- [Clearview Health Plans] is described as a \"Regional health insurer covering about 800K members across three states\"\n- [Members Table] contains \"approximately 800K rows\" of member enrollment data\n\nThe geographic coverage spans three states, as indicated by [Clearview Health Plans] being described as covering members \"across three states.\"\n\nHowever, the specific names of the three states are not provided in the available entities.\n\nPARTIAL\n\nThe context provides the member count (800K) and indicates coverage across three states, but is missing the specific identification of which three states comprise Clearview's geographic coverage area.",
+    "original_score": "partial",
+    "original_ddc": "INCOMPLETE",
+    "topic": "Company Scale"
+  },
+  {
+    "index": 24,
+    "question": "If a member's eligibility status changes mid-month, how does this impact claims that are already in the adjudication pipeline across multiple teams' systems?",
+    "answer": "When a member's eligibility status changes mid-month, it impacts claims in the adjudication pipeline through several automated processes:\n\n**Immediate Impact on Pipeline Claims:**\nClaims already in the pipeline are subject to the [Eligibility Date of Service Rule], which requires eligibility verification against the date of service, not the submission date. This means that even claims already submitted will be re-evaluated based on the member's eligibility status on the actual service date.\n\n**Retroactive Reprocessing:**\nThe eligibility change triggers an [Enrollment Change Event], which is published by the [Eligibility Service]. This event then triggers the [Retroactive Reprocessing] process, which automatically re-adjudicates claims when member enrollment changes are backdated.\n\n**Cross-System Coordination:**\nThe [Claim Routing Process] involves multiple systems including the [Eligibility Service], which serves as the source of truth for member enrollment. When enrollment changes occur, the [Enrollment Change Event] is consumed by the [Claims Gateway], ensuring that the routing process reflects the updated eligibility status.\n\n**Time-Bound Reprocessing:**\nFor retroactive changes, the [Retroactive Enrollment Reprocessing] automatically reprocesses affected claims when retroactive enrollment changes occur within a 60-day window. This process is triggered by the [Eligibility Service] and affects existing claims in the system.\n\n**Historical Validation:**\nThe system uses [Point-in-Time Eligibility Rules] to govern historical eligibility lookups, which includes a 2-year retrospective limit for validating eligibility against service dates.\n\nPARTIAL\n\nThe context provides good coverage of the automated reprocessing mechanisms but lacks specific details about how claims are handled while actively in different stages of the adjudication pipeline across multiple teams' systems. Missing information includes: specific handling of claims in fraud detection review, pre-authorization status during eligibility changes, and detailed coordination mechanisms between different team systems during the transition period.",
+    "original_score": "partial",
+    "original_ddc": "INCOMPLETE",
+    "topic": "eligibility changes"
+  },
+  {
+    "index": 23,
+    "question": "When a claim requires both fraud review and prior authorization, how do these processes interact across the different systems?",
+    "answer": "Based on the provided entities, I can describe how fraud review and prior authorization processes interact within the system architecture:\n\n**System Integration:**\nBoth processes are integrated through the [Claim Routing Process], which routes validated claims to appropriate downstream systems including the [Pre-Auth Service], [Fraud Detection], and other components [Claim Routing Process]. The [Claim] data model serves as the central entity that links to both [Authorization] data and is processed by fraud detection systems [Claim].\n\n**Processing Flow:**\nWhen a claim requires prior authorization, it interacts with the [Pre-Auth Service] which manages authorization requests with auto-approval and clinical review routing [Pre-Auth Service]. The authorization data is tracked through the [Authorization] data model with validity tracking [Authorization], and authorization requirements are enforced based on service-specific rules per benefit plan [Pre-Authorization Requirements].\n\nFor fraud detection, the system uses [Fraud Detection] with ML-based scoring at intake, and there's an ongoing migration from asynchronous to synchronous fraud scoring through [Fraud Detection Pre-Payment Integration] [Fraud Detection Pre-Payment Integration]. The [Fraud Scoring Thresholds] use a three-tier system with thresholds at 0.65 and 0.82, which can trigger the [SIU Review Process] for high-risk cases [Fraud Scoring Thresholds].\n\n**Missing Information:**\nHowever, the entities do not provide specific details about:\n- The exact sequence when both processes are required simultaneously\n- How prior authorization status affects fraud scoring decisions\n- Whether fraud flags can override or delay prior authorization approvals\n- Specific integration points or data sharing between the Pre-Auth Service and Fraud Detection systems\n- How timing conflicts are resolved when both processes are triggered",
+    "original_score": "not_answerable",
+    "original_ddc": "MISSING",
+    "topic": "cross-system flow"
+  },
+  {
+    "index": 6,
+    "question": "What percentage of prior authorization requests does Clearview target for auto-approval?",
+    "answer": "Based on the provided entities, I can identify that Clearview has a target threshold of 50% for auto-approval rates in their prior authorization system. The [Auto-Approval Rate Drop] entity indicates that alerts are triggered when the \"Pre-Auth Service auto-approval rate falls below 50% target threshold.\"\n\nHowever, this information tells us the minimum threshold that triggers alerts, not necessarily the target percentage that Clearview aims to auto-approve. The 50% appears to be an alert threshold rather than their aspirational auto-approval target rate.\n\nThe missing information needed to fully answer this question includes:\n- What is Clearview's actual target auto-approval percentage (as opposed to the alert threshold)\n- Whether the 50% threshold represents their goal or just a minimum acceptable level\n- Any documentation of their intended auto-approval rate objectives",
+    "original_score": "not_answerable",
+    "original_ddc": "MISSING",
+    "topic": "pre-auth targets"
+  }
+]

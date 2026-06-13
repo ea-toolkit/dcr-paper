@@ -1,0 +1,283 @@
+{
+  "model": "gpt-4o",
+  "pairs_total": 30,
+  "dcr_pairs": 15,
+  "rag_pairs": 15,
+  "agreement": 24,
+  "agreement_pct": 80.0,
+  "dcr_missing_gpt4": 1,
+  "rag_missing_gpt4": 1,
+  "direction_holds": true,
+  "results": [
+    {
+      "index": 5,
+      "question": "Which system handles member deductible tracking and out-of-pocket maximums?",
+      "answer": "Based on the provided entities, the **Eligibility Service** is the system that handles member deductible tracking and out-of-pocket maximums [eligibility-service].\n\nThe Eligibility Service serves as the \"source of truth for member enrollment, handling EDI transactions and tracking accumulators\" [eligibility-service]. The actual tracking is accomplished through **Accumulators**, which are \"data model tracking member benefit utilization including deductibles and out-of-pocket maximums\" [accumulator]. These accumulators are owned by the Eligibility Service [accumulator].\n\nThe tracking functionality is supported by **Accumulator Types Logic**, which defines \"business rules defining four accumulator types for tracking member deductible and out-of-pocket progress\" [accumulator-types-logic]. This logic is applied to the accumulator data model and used by the rules engine [accumulator-types-logic].\n\nThe tracked deductible and out-of-pocket maximum information is made available to members through the **Benefit Balance Visualization Process**, which provides \"enhanced display of member deductible and out-of-pocket maximum progress with visual progress bars\" [benefit-balance-visualization-process]. This process depends on the Eligibility Service and uses the accumulator data [benefit-balance-visualization-process].\n\nThe Eligibility Service is owned by the Member Services team [eligibility-service] and also manages related data models including Member records [member] and Benefit Plan configurations [benefit-plan].",
+      "original_ddc": "CLEAN",
+      "condition": "dcr",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 1,
+      "question": "Which team is responsible for maintaining the Rules Engine system?",
+      "answer": "Based on the provided entities, the **Claims Operations** team is responsible for maintaining the Rules Engine system [Claims Operations]. This team owns the claims processing pipeline end-to-end [Claims Operations] and has ownership of the current Rules Engine [Rules Engine] as well as the new Drools-Based Rules Engine that is being developed to replace the legacy system [Drools-Based Rules Engine].\n\nThe Claims Operations team is led by Marcus Reeves [Marcus Reeves] and includes Senior Engineer Kenji Watanabe who joined specifically for the Rules Engine migration [Kenji Watanabe]. The team is also working with Rachel Dominguez, a contractor from Apex Consulting who serves as the Rules Engine migration subject matter expert [Rachel Dominguez].\n\nThe team owns the entire Rules Engine Migration Process, which is a three-phase process to migrate from the current HealthLogic Adjudicator to a custom Drools-based rules engine [Rules Engine Migration Process].",
+      "original_ddc": "CLEAN",
+      "condition": "dcr",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 14,
+      "question": "Which system generates the 835 remittance advice files?",
+      "answer": "Based on the provided domain knowledge entities, the **Payment Engine** system generates the 835 remittance advice files [ERA 835].\n\nThe ERA 835 (Electronic Remittance Advice) format provides payment details to healthcare providers [ERA 835], and it is produced by the payment-engine [ERA 835]. The Payment Engine is described as a system that processes adjudicated claims into payments via EFT and handles remittance advice [Payment Engine].\n\nThe system is owned by claims-operations [Payment Engine] and exposes a Payment API that provides access to payment history, remittance advice, and payment holds [Payment API]. Additionally, there are improvements in place where ERA 835 generation can be delayed until settlement confirmation to address timing mismatch problems in payment reconciliation [ERA 835 Settlement Confirmation].",
+      "original_ddc": "CLEAN",
+      "condition": "dcr",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 46,
+      "question": "What are the three possible outcomes when the Rules Engine processes a claim?",
+      "answer": "Based on the provided domain knowledge entities, when the Rules Engine processes a claim, there are three possible outcomes: **PAY**, **DENY**, or **PEND**.\n\nThis information comes from two key entities:\n\n1. The **Claim Adjudicated Event** describes an \"Event emitted when Rules Engine completes adjudication with PAY, DENY, or PEND disposition\" [Claim Adjudicated Event].\n\n2. The **Adjudication Disposition Rules** entity describes \"Logic determining PAY/DENY/PEND outcomes from rules engine evaluation\" [Adjudication Disposition Rules].\n\nThese three dispositions represent the complete set of possible outcomes when the Rules Engine evaluates a claim against plan rules, benefit schedules, and medical policies through the adjudication process [Adjudication].",
+      "original_ddc": "CLEAN",
+      "condition": "dcr",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 35,
+      "question": "Which team would handle an issue with member deductible calculations?",
+      "answer": "Based on the domain knowledge provided, the **Member Services** team would handle issues with member deductible calculations.\n\nHere's why Member Services is responsible:\n\n1. **Direct ownership of key systems**: Member Services owns both the eligibility service [Eligibility Service] and member portal [Member Portal], which are the primary systems involved in deductible tracking and display.\n\n2. **Ownership of deductible data**: The accumulator data model that tracks \"member benefit utilization including deductibles and out-of-pocket maximums\" is owned by the eligibility service [Accumulator], which in turn is owned by Member Services [Eligibility Service].\n\n3. **Established escalation process**: There is a specific \"Member Escalation Process\" for \"handling member complaints and escalations related to eligibility and accumulator issues\" that is owned by Member Services [Member Escalation Process].\n\n4. **Deductible display responsibility**: Member Services manages the \"Benefit Balance Visualization Process\" which handles the \"display of member deductible and out-of-pocket maximum progress\" through the member portal [Benefit Balance Visualization Process].\n\n5. **Known deductible issues**: The domain includes a \"Double Applied Deductible Event\" which affects the accumulator and triggers the member escalation process [Double Applied Deductible Event], indicating Member Services handles these types of deductible calculation problems.\n\nWhile other teams like the Compliance Team provide advisory support and the Benefits Administration Team handles enrollment data, Member Services has direct ownership of the systems and processes that handle deductible calculations and related member issues.",
+      "original_ddc": "CLEAN",
+      "condition": "dcr",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 11,
+      "question": "What does COB stand for and when does it apply?",
+      "answer": "Based on the provided entities, COB stands for \"Coordination of Benefits\" [COB]. \n\nCOB applies when a member has coverage from multiple payers [COB]. This situation requires determining which insurance should be the primary payer versus the secondary payer, following specific business rules such as the birthday rule and active/retired rule [COB Payer Order Rules].\n\nThe coordination of benefits process is used to calculate secondary payer responsibility [Coordination of Benefits Logic] and involves storing COB information within member records [COB Data Model]. Currently, this information is collected through a member portal questionnaire [COB Questionnaire], though there are plans for an automated detection project scheduled for Q1 2026 [COB Auto-Detection Project].\n\nThe system also conducts annual verification through mailed letters to members with other coverage [Annual COB Verification Letters] to ensure the coordination of benefits information remains accurate.\n\nHowever, the entities do not provide specific information about the temporal aspects of when COB rules were established, how they have changed over time, or the historical development of COB processes within this organization.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "dcr",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 42,
+      "question": "How many members does Clearview cover and across which geographic area?",
+      "answer": "Based on the provided entities, Clearview covers approximately **800,000 members** across **three states**.\n\nThe member count is supported by two consistent sources:\n- [Clearview Health Plans] is described as a \"Regional health insurer covering about 800K members across three states\"\n- [Members Table] contains \"approximately 800K rows\" of member enrollment data\n\nThe geographic coverage spans three states, as indicated by [Clearview Health Plans] being described as covering members \"across three states.\"\n\nHowever, the specific names of the three states are not provided in the available entities.\n\nPARTIAL\n\nThe context provides the member count (800K) and indicates coverage across three states, but is missing the specific identification of which three states comprise Clearview's geographic coverage area.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "dcr",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 10,
+      "question": "What types of claim submission formats does the Claims Gateway accept?",
+      "answer": "Based on the provided entities, I can identify that the Claims Gateway accepts claim submissions through multiple channels, but specific format details are limited.\n\nThe Claims Gateway accepts claims through the following submission methods:\n\n1. **REST API submissions** - The Claims Gateway exposes REST APIs for claim submission, including the current Claims Submission API v2 and the deprecated Claims Submission API v1 [Claims Submission API], [Claims Submission API v1], [Claims Submission API v2].\n\n2. **Paper claims via OCR** - The Claims Gateway receives structured data from paper claims that have been processed through an OCR Pipeline, which handles fax and mail submissions by extracting structured data via OCR and routing it to the Claims Gateway [OCR Pipeline].\n\nThe system validates the format of incoming claims as part of its core functionality, as the Claims Gateway \"receives all incoming claims, validates format, checks duplicates, and routes downstream\" [Claims Gateway]. When claims are successfully received and validated, a Claim Submitted Event is triggered [Claim Submitted Event].\n\nHowever, the entities do not specify the exact technical formats (such as specific JSON schemas, XML formats, EDI standards, or other structured data formats) that these submission channels accept.\n\n**PARTIAL**\n\nThe context provides information about the submission channels (REST APIs and OCR-processed paper claims) but lacks specific details about the actual data formats, schemas, or standards (like EDI, JSON structure, XML schemas) that the Claims Gateway accepts for claim submissions.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "dcr",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 39,
+      "question": "Which systems need to be updated when a provider's contract terms change?",
+      "answer": "Based on the provided entities, when a provider's contract terms change, the following systems need to be updated:\n\n**Core Systems:**\n- **Provider Directory** - This is the master data system for contracted provider information [Provider Directory]\n- **Fee Schedule** - Contract changes would affect the contracted allowed amounts for procedure codes [Fee Schedule]\n\n**Downstream Systems Receiving Updates:**\n- **Rules Engine** - Consumes provider status change events and uses fee schedule data [Provider Status Changed Event] [Fee Schedule]\n- **Member Portal** - Consumes provider status change events [Provider Status Changed Event]\n- **Fraud Detection** - Receives nightly provider profile updates through sync events [Provider Profile Sync Event]\n\n**Update Mechanisms:**\nThe update process is orchestrated through events: when provider contract information changes in the Provider Directory, it publishes a **Provider Status Changed Event** [Provider Status Changed Event]. This event is then consumed by downstream systems like the Rules Engine and Member Portal to ensure they have current contract information.\n\n**Processing Systems:**\nThe **Provider Self-Service Portal** communicates with multiple systems including the Provider Directory and Payment Engine, suggesting it may also need updates when contract terms change [Provider Self-Service Portal].\n\nHowever, the entities don't provide a complete picture of all systems that might be affected by contract changes. While we can see the core provider data systems and some downstream consumers, there may be other systems like claims processing, payment systems, or reporting systems that would also need updates but aren't clearly identified in the provided context.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "dcr",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 48,
+      "question": "Which systems need to communicate when processing a claim that requires coordination of benefits with another insurer?",
+      "answer": "Based on the provided entities, I can identify some systems involved in COB claim processing, but the information is incomplete regarding system-to-system communication.\n\nWhen processing a claim that requires coordination of benefits, the following systems are involved:\n\n**Internal Systems:**\n- **Claims Gateway** - receives and processes all incoming claims [Claims Gateway] and executes the claims processing workflow [Claims Processing Workflow]\n- **Rules Engine** - processes claims [Claim] and uses COB payer order rules to determine primary vs secondary payer responsibility [COB Payer Order Rules] and enforces coordination of benefits logic [Coordination of Benefits Logic]\n- **Member Portal** - hosts the COB questionnaire for collecting coordination of benefits information [COB Questionnaire] and displays EOBs [EOB]\n\n**Data Sources:**\n- **COB Data Model** - stores coordination of benefits information within member records [COB Data Model] that gets updated by the COB questionnaire [COB Questionnaire] and validated by annual verification letters [Annual COB Verification Letters]\n\nHowever, the entities do not specify what external systems need to be contacted for coordination with other insurers. While the context mentions that COB involves \"coverage from multiple payers\" [COB] and includes logic for \"calculating secondary payer responsibility\" [Coordination of Benefits Logic], there are no details about:\n\n- External payer systems or clearinghouses that need to be contacted\n- Third-party verification services\n- Communication protocols or interfaces with other insurers\n- Real-time eligibility verification systems for other coverage",
+      "original_ddc": "INCOMPLETE",
+      "condition": "dcr",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 33,
+      "question": "What validation does the Claims Gateway perform before routing claims downstream?",
+      "answer": "Based on the provided entities, the Claims Gateway performs several types of validation before routing claims downstream:\n\n**Format and Basic Validation:**\nThe Claims Gateway \"validates format, checks duplicates, and routes downstream\" [Claims Gateway]. This indicates basic structural validation of incoming claims.\n\n**API Version-Specific Validation:**\n- **Claims API v2**: Implements \"synchronous validation in Claims Submission API v2 that rejects invalid claims immediately\" [Claims API v2 Validation Logic]\n- **Claims API v1**: Uses an \"asynchronous validation approach in Claims Submission API v1 that accepts invalid claims\" [Claims API v1 Validation Logic]\n\n**Fraud Detection Integration:**\nThe system includes fraud scoring as part of validation, with a migration happening from asynchronous to synchronous fraud detection. The \"Fraud Detection Pre-Payment Integration\" represents a \"migration from asynchronous to synchronous fraud scoring in Claims Gateway intake flow\" [Fraud Detection Pre-Payment Integration].\n\n**Event Publishing After Validation:**\nOnce validation is complete, the gateway publishes a \"Kafka event published when Claims Gateway receives and validates a new claim submission\" [Claim Submitted Event (Kafka)], indicating that validation occurs before this event is triggered.\n\n**OCR-Processed Claims:**\nFor claims coming from the OCR Pipeline, there are \"business rules for routing claims based on OCR extraction confidence levels and field accuracy\" [OCR Confidence Scoring Rules] that influence validation decisions.\n\nHowever, the entities do not provide specific details about what constitutes valid format, what duplicate checking algorithms are used, or the specific validation rules applied beyond fraud detection.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "dcr",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 8,
+      "question": "What fraud detection score threshold triggers a hold for SIU review?",
+      "answer": "Based on the provided entities, the fraud detection system uses a three-tier fraud scoring system with specific thresholds that determine when claims are held for SIU review.\n\nThe system has **thresholds at 0.65 and 0.82** for different processing paths [Fraud Scoring Thresholds]. These thresholds are part of a three-tier classification system [New Fraud Scoring Thresholds] that determines how claims are processed based on their fraud risk scores.\n\nWhen claims exceed certain threshold levels, they trigger the SIU Review Process [SIU Review Process], which is a manual review process conducted by the Special Investigation Unit for high-risk fraud claims [SIU]. The SIU is responsible for investigating potential fraud, waste, and abuse cases [SIU].\n\nThe fraud scores are generated by an XGBoost machine learning model [XGBoost Fraud Model] that operates with 120ms p99 latency for real-time scoring. The system can also trigger fraud alert events when suspicious patterns are identified that require SIU investigation [Fraud Alert Event].\n\nHowever, while the context provides the two threshold values (0.65 and 0.82), it does not explicitly specify which of these thresholds specifically triggers a hold for SIU review, or if both thresholds result in SIU holds with different priorities or processing approaches.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "dcr",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 40,
+      "question": "How does the Rules Engine access current fee schedules for providers?",
+      "answer": "Based on the provided entities, the Rules Engine accesses current fee schedules through the following mechanisms:\n\nThe Rules Engine uses Fee Schedules as part of its adjudication process [Fee Schedule]. Fee Schedules are data models that define contracted allowed amounts for procedure codes by provider contract, and they are owned by the provider directory but used by the Rules Engine [Fee Schedule].\n\nThe Rules Engine performs Allowed Amount Calculation, which is a business rule that calculates the maximum payable amount based on provider contract fee schedules [Allowed Amount Calculation]. This calculation derives from the provider directory [Allowed Amount Calculation].\n\nFor services without contracted rates, the Rules Engine can utilize Clearview Standard Schedules, which are internal fee schedules maintained by the actuarial team and used by the allowed amount calculation process [Clearview Standard Schedules].\n\nFor out-of-network providers, the Rules Engine uses Usual and Customary pricing methodology based on Medicare RBRVS data as an alternative to standard fee schedules [Usual and Customary].\n\nHowever, the entities do not provide specific technical details about how the Rules Engine actually accesses these fee schedules - such as whether it uses direct database connections, API calls, file transfers, or other integration methods. The entities also don't specify how frequently the fee schedules are updated or synchronized with the Rules Engine.\n\nNOT_ANSWERABLE\n\nThe context describes what fee schedule data the Rules Engine uses but lacks specific information about the technical mechanisms, interfaces, or processes by which the Rules Engine actually accesses current fee schedules from their source systems.",
+      "original_ddc": "MISSING",
+      "condition": "dcr",
+      "gpt4_raw": "NOT_ANSWERABLE",
+      "gpt4_ddc": "MISSING"
+    },
+    {
+      "index": 23,
+      "question": "When a claim requires both fraud review and prior authorization, how do these processes interact across the different systems?",
+      "answer": "Based on the provided entities, I can describe how fraud review and prior authorization processes interact within the system architecture:\n\n**System Integration:**\nBoth processes are integrated through the [Claim Routing Process], which routes validated claims to appropriate downstream systems including the [Pre-Auth Service], [Fraud Detection], and other components [Claim Routing Process]. The [Claim] data model serves as the central entity that links to both [Authorization] data and is processed by fraud detection systems [Claim].\n\n**Processing Flow:**\nWhen a claim requires prior authorization, it interacts with the [Pre-Auth Service] which manages authorization requests with auto-approval and clinical review routing [Pre-Auth Service]. The authorization data is tracked through the [Authorization] data model with validity tracking [Authorization], and authorization requirements are enforced based on service-specific rules per benefit plan [Pre-Authorization Requirements].\n\nFor fraud detection, the system uses [Fraud Detection] with ML-based scoring at intake, and there's an ongoing migration from asynchronous to synchronous fraud scoring through [Fraud Detection Pre-Payment Integration] [Fraud Detection Pre-Payment Integration]. The [Fraud Scoring Thresholds] use a three-tier system with thresholds at 0.65 and 0.82, which can trigger the [SIU Review Process] for high-risk cases [Fraud Scoring Thresholds].\n\n**Missing Information:**\nHowever, the entities do not provide specific details about:\n- The exact sequence when both processes are required simultaneously\n- How prior authorization status affects fraud scoring decisions\n- Whether fraud flags can override or delay prior authorization approvals\n- Specific integration points or data sharing between the Pre-Auth Service and Fraud Detection systems\n- How timing conflicts are resolved when both processes are triggered",
+      "original_ddc": "MISSING",
+      "condition": "dcr",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 6,
+      "question": "What percentage of prior authorization requests does Clearview target for auto-approval?",
+      "answer": "Based on the provided entities, I can identify that Clearview has a target threshold of 50% for auto-approval rates in their prior authorization system. The [Auto-Approval Rate Drop] entity indicates that alerts are triggered when the \"Pre-Auth Service auto-approval rate falls below 50% target threshold.\"\n\nHowever, this information tells us the minimum threshold that triggers alerts, not necessarily the target percentage that Clearview aims to auto-approve. The 50% appears to be an alert threshold rather than their aspirational auto-approval target rate.\n\nThe missing information needed to fully answer this question includes:\n- What is Clearview's actual target auto-approval percentage (as opposed to the alert threshold)\n- Whether the 50% threshold represents their goal or just a minimum acceptable level\n- Any documentation of their intended auto-approval rate objectives",
+      "original_ddc": "MISSING",
+      "condition": "dcr",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 18,
+      "question": "Which team would I contact about issues with digital ID cards on the member portal?",
+      "answer": "Based on the provided information, for issues with digital ID cards on the member portal, you would contact the **Member Services** team [Member Services].\n\nThe Member Portal is owned by the Member Services team [Member Portal], and the Digital ID Card Redesign Process is executed by the member portal [Digital ID Card Redesign Process]. Since Member Services owns the member portal system [Member Services], they would be responsible for handling issues related to digital ID cards displayed within that system.\n\nAdditionally, Dana Okafor is identified as the Member Services team lead responsible for eligibility and member portal systems [Dana Okafor], which would include digital ID card functionality.",
+      "original_ddc": "CLEAN",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 2,
+      "question": "What does it mean when a claim is 'pended' during adjudication?",
+      "answer": "When a claim is 'pended' during adjudication, it means that the claim cannot be automatically processed and requires manual review [Pend]. This occurs during the adjudication process, which evaluates a claim against plan rules to decide whether to pay, deny, or pend the claim [Adjudication]. \n\nThe Rules Engine completes adjudication with one of three possible dispositions: PAY, DENY, or PEND [Claim Adjudicated Event]. When a claim receives a PEND disposition, it gets routed to the Claims Adjudicator Queue, which is a work queue specifically for manual review of pended claims by senior claims staff [Claims Adjudicator Queue]. This queue is fed by the rules engine when claims cannot be auto-adjudicated [Claims Adjudicator Queue].\n\nThe healthcare system has targets for auto-adjudication rates, aiming for 85% of claims to be automatically processed, with alerts triggered when the rate drops below 75% [Auto-Adjudication Rate Targets]. Claims that fall outside the auto-adjudication parameters are the ones that get pended for manual review.",
+      "original_ddc": "CLEAN",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 1,
+      "question": "Which team is responsible for maintaining the Rules Engine system?",
+      "answer": "Based on the provided entities, the **Claims Operations team** is responsible for maintaining the Rules Engine system.\n\nThe Rules Engine is a system that adjudicates claims against benefit plans, fee schedules, and medical policies [Rules Engine]. This system is owned by the Claims Operations team [Rules Engine]. Additionally, the Rules Engine Migration Process, which involves transitioning from the current HealthLogic-provided system to a new custom Drools-based rules engine, is also owned by Claims Operations [Rules Engine Migration Process].\n\nThe team has personnel dedicated to this system, including Kenji Watanabe, who is described as a Senior Engineer joining the Claims Operations team specifically for the Rules Engine migration [Kenji Watanabe].",
+      "original_ddc": "CLEAN",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 32,
+      "question": "What is the purpose of ERA 835 remittance advice?",
+      "answer": "Based on the provided entities, the ERA 835 remittance advice serves as an electronic remittance advice format that provides payment details to healthcare providers [ERA 835]. \n\nThe ERA 835 is produced by the payment engine [ERA 835] and is used to communicate standard denial reason codes (CARC/RARC) to providers [CARC/RARC]. This remittance advice works in conjunction with the payment processing system, where the payment engine processes adjudicated claims into payments via EFT and handles remittance advice [Payment Engine].\n\nThe ERA 835 also plays a role in payment reconciliation, as there are processes in place to ensure proper settlement confirmation, where ERA 835 generation is delayed until settlement confirmation to improve payment reconciliation [ERA 835 Settlement Confirmation].",
+      "original_ddc": "CLEAN",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 6,
+      "question": "What percentage of prior authorization requests does Clearview target for auto-approval?",
+      "answer": "Based on the provided entities, Clearview targets a **50% auto-approval rate** for prior authorization requests [Auto-Approval Rate Drop].\n\nThis information comes from the alert threshold configured in their system - when the Pre-Auth Service auto-approval rate falls below 50%, it triggers an investigation process [Auto-Approval Rate Drop]. This 50% threshold appears to represent their target rate, as it's the point at which they consider the performance concerning enough to warrant investigation.",
+      "original_ddc": "CLEAN",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 21,
+      "question": "What information does the Provider Directory maintain about contracted providers?",
+      "answer": "Based on the provided entities, the Provider Directory maintains the following information about contracted providers:\n\n**Core Provider Information:**\n- Demographics [Provider Directory]\n- Network status [Provider Directory] \n- Provider credentials [Provider]\n- Network participation details [Provider]\n\n**Financial Contract Information:**\n- Fee schedules that define contracted allowed amounts for procedure codes by provider contract [Fee Schedule]\n- The fee schedule data links directly to provider records [Fee Schedule]\n\n**Data Management:**\n- The system tracks when provider information or network status changes and publishes events when updates occur [Provider Status Changed Event]\n- Provider credentials are verified every 3 years through a re-credentialing process per NCQA standards [Provider Re-credentialing Process]\n- Changes to provider demographic information go through a two-business-day approval workflow [Provider Change Approval Workflow]\n\nThe Provider Directory serves as the master data system for this contracted provider information and is owned by the Provider Network team [Provider Directory] [Provider Network].\n\nPARTIAL\n\nThe context provides a good overview of the types of information maintained (demographics, network status, credentials, fee schedules), but lacks specific details about what demographic fields are tracked, what constitutes network status information, or what specific credential data is stored in the system.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 49,
+      "question": "What is an NPI and which systems in our architecture would need to store or validate this information?",
+      "answer": "Based on the provided domain knowledge entities, I can answer what an NPI is and partially address which systems would need to store or validate this information.\n\nAn NPI is a National Provider Identifier, which serves as the unique ID for healthcare providers [NPI].\n\nRegarding which systems in your architecture would need to store or validate this information, the context shows that NPI is used in the Provider Directory [NPI]. However, given that NPIs are fundamental identifiers for healthcare providers, there are likely other systems in your architecture that would also need to store or validate this information, but the provided context doesn't give complete visibility into all systems that handle provider data.\n\nThe context does show that provider information flows through your system via the Provider Status Changed Event, which is published by the Provider Directory and consumed by the Rules Engine and Member Portal [Provider Status Changed Event]. This suggests these consuming systems may also need to handle NPI data, but this isn't explicitly confirmed in the available information.\n\nPARTIAL\n\nThe context is missing specific information about all the systems in the architecture that store or validate NPI information beyond the Provider Directory. While we can infer that other systems likely handle NPIs based on data flows, the exact systems and their NPI validation/storage requirements are not comprehensively documented in the provided entities.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 15,
+      "question": "What happens when the Claims Gateway detects a duplicate claim submission?",
+      "answer": "Based on the provided entities, when the Claims Gateway detects a duplicate claim submission, the system has a process in place to handle it through the Duplicate Detection Process [Duplicate Detection Process].\n\nThe Claims Gateway [Claims Gateway] is described as a system that \"receives all incoming claims, validates format, checks duplicates, and routes downstream.\" When a claim is submitted, it triggers a Claim Submitted Event [Claim Submitted Event], which in turn \"triggers duplicate-detection-process.\"\n\nThe Duplicate Detection Process [Duplicate Detection Process] is described as a \"Process for identifying and preventing duplicate claim submissions using composite key matching\" that is \"executed_by claims-gateway\" and \"involves member-id\" and \"involves npi.\"\n\nHowever, the entities do not specify exactly what action is taken when a duplicate is actually detected - whether the duplicate claim is rejected, flagged, or handled in some other specific way. The process description indicates it's for \"preventing duplicate claim submissions,\" but the specific outcome or response when a duplicate is found is not detailed.\n\nThe specific information missing is: what exact action or response occurs when the duplicate detection process successfully identifies a duplicate claim (e.g., rejection, error response, logging, etc.).",
+      "original_ddc": "INCOMPLETE",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 42,
+      "question": "How many members does Clearview cover and across which geographic area?",
+      "answer": "Based on the provided entities, Clearview covers approximately 800,000 members across three states [Clearview Health Plans]. This information is also confirmed by the Members Table entity, which stores member enrollment data with approximately 800K rows [Members Table].\n\nHowever, the entities do not specify which three states Clearview operates in, only that it's a regional health insurer covering three states.\n\nPARTIAL\n\nThe context provides the number of members (800K) but is missing the specific geographic details about which three states are covered.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 11,
+      "question": "What does COB stand for and when does it apply?",
+      "answer": "Based on the provided entities, COB appears to stand for \"Coordination of Benefits\" [COB Questionnaire]. This can be inferred from the entity describing a \"Member Portal questionnaire for collecting coordination of benefits information.\"\n\nCOB applies in several contexts within the healthcare system:\n\n1. **Member data collection**: Through a questionnaire on the Member Portal where members provide coordination of benefits information, which has approximately a 40% completion rate [COB Questionnaire]\n\n2. **Claims analysis**: Via a weekly batch job that analyzes claims data for COB detection signals [COB Batch Analysis]\n\n3. **Verification processes**: Through a five-step process for verifying and updating member COB information after auto-detection [COB Verification Workflow]\n\n4. **Medicare eligibility**: In conjunction with the Healthcare Eligibility Transaction System (HETS) for Medicare beneficiary lookups and eligibility verification, which supports COB detection signals [HETS]\n\n5. **Regulatory compliance**: Under the oversight of the Compliance Team, which handles COB policy questions and regulatory compliance matters [Compliance Team]\n\nHowever, the entities do not provide a complete definition of what \"Coordination of Benefits\" specifically means or the detailed circumstances when COB rules must be applied.\n\nPARTIAL\n\nThe context provides strong evidence that COB stands for \"Coordination of Benefits\" and shows various processes where it applies, but lacks a formal definition of coordination of benefits and specific triggering conditions for when COB rules must be implemented.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 40,
+      "question": "How does the Rules Engine access current fee schedules for providers?",
+      "answer": "Based on the provided entities, the Rules Engine accesses current fee schedules through a defined relationship in the system architecture. The Rules Engine uses Fee Schedule data [Rules Engine] [Fee Schedule], where the Fee Schedule is described as a data model that defines contracted allowed amounts for procedure codes by provider contract [Fee Schedule].\n\nThe Fee Schedule data is owned by the provider-directory system [Fee Schedule], which suggests that the Rules Engine likely accesses this information through integration with the provider directory system to obtain the current fee schedule information needed for claims adjudication.\n\nHowever, the specific technical mechanism, APIs, protocols, or data access patterns that the Rules Engine uses to retrieve current fee schedules are not detailed in the provided entities. The entities establish that there is a \"used_by\" relationship between the Fee Schedule and Rules Engine, but do not explain the implementation details of how this access occurs, whether it's through direct database queries, API calls, cached data, real-time lookups, or scheduled data synchronization.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 36,
+      "question": "What information can members access through the Member Portal?",
+      "answer": "Based on the provided entities, members can access the following information through the Member Portal:\n\n- **Claims status** - Members can view the status of their healthcare claims [Member Portal]\n- **Benefits information** - Members can access their benefit details [Member Portal]\n- **Provider search functionality** - Members can search for healthcare providers, powered by Elasticsearch search capabilities [Member Portal, Elasticsearch]\n- **Digital services** - Various digital services are available through the portal [Member Portal]\n- **Coordination of Benefits (COB) questionnaire** - Members can complete questionnaires to provide information about other insurance coverage they may have [COB Questionnaire]\n- **Explanation of Benefits (EOB) documents** - Members can access documents showing what was covered by their health plan [EOB]\n\nThe Member Portal is undergoing improvements, with a redesigned version launching in November 2025 that will feature enhanced claims status and benefit balance features [Member Portal Redesign].\n\nPARTIAL\n\nThe context provides good information about several key features available through the Member Portal, but it lacks comprehensive details about all possible member services and functionalities that might be available, such as specific benefit details, appointment scheduling, prescription information, or other digital services beyond what's explicitly mentioned.",
+      "original_ddc": "INCOMPLETE",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "ANSWERABLE",
+      "gpt4_ddc": "CLEAN"
+    },
+    {
+      "index": 10,
+      "question": "What types of claim submission formats does the Claims Gateway accept?",
+      "answer": "Based on the provided entities, I cannot find specific information about the types of claim submission formats that the Claims Gateway accepts.\n\nThe entities mention that the Claims Gateway \"receives all incoming claims, validates format, checks duplicates, and routes downstream\" [Claims Gateway], indicating that it does perform format validation. There are also references to REST APIs for claim submission through the Claims Submission API v1 and v2 [Claims Submission API, Claims Submission API v2], and mentions of UB-04 institutional claim forms in relation to TOB codes [TOB]. Additionally, there's a manual data entry process for OCR-extracted claim data [Manual Data Entry Process].\n\nHowever, the entities do not provide specific details about what claim submission formats are supported, such as whether it accepts EDI formats, JSON, XML, or other specific standards beyond the general mention of REST API endpoints and UB-04 forms.\n\nTo fully answer this question, I would need specific information about:\n- The complete list of supported claim submission formats\n- Technical specifications for each format\n- Any format-specific validation rules\n- Differences in format support between API versions",
+      "original_ddc": "MISSING",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 26,
+      "question": "What happens when the Rules Engine determines a claim should be pended?",
+      "answer": "Based on the provided entities, when the Rules Engine determines a claim should be pended, the following occurs:\n\nThe claim cannot be auto-adjudicated and needs manual review [Pend]. This pend disposition is determined by the Adjudication Disposition Rules, which contain the logic for determining PAY/DENY/PEND outcomes from rules engine evaluation [Adjudication Disposition Rules].\n\nWhen this pend decision is made, the Rules Engine completes adjudication and emits a Claim Adjudicated Event with the PEND disposition [Claim Adjudicated Event]. This event is then consumed by downstream systems including the payment-engine and member-portal [Claim Adjudicated Event].\n\nHowever, the entities do not provide specific details about what manual review processes are triggered, who performs the manual review, what systems handle pended claims after the event is emitted, or what criteria specifically cause a claim to be pended rather than paid or denied.\n\nNOT_ANSWERABLE\n\nThe context explains that pended claims need manual review and that a Claim Adjudicated Event is emitted, but it lacks crucial information about the specific processes, systems, or workflows that handle claims after they are pended, and what specific business rules or conditions trigger a pend disposition.",
+      "original_ddc": "MISSING",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "PARTIAL",
+      "gpt4_ddc": "INCOMPLETE"
+    },
+    {
+      "index": 22,
+      "question": "What does it mean when someone says 'the gateway is backed up'?",
+      "answer": "Based on the provided context, I cannot find a specific definition or explanation for what \"the gateway is backed up\" means. \n\nThe context provides information about the Claims Gateway system, which \"receives all incoming claims, validates format, checks duplicates, and routes downstream\" [Claims Gateway]. There are references to various operational issues and processes related to the gateway, including incident response procedures [Claims Gateway Incident Response] and deployment processes [Claims Gateway Deployment].\n\nHowever, the specific phrase \"the gateway is backed up\" and its meaning in this domain context is not explicitly defined or explained in any of the provided entities. To properly answer this question, I would need additional information that specifically defines what \"backed up\" means when referring to the gateway system - whether it refers to a queue of pending claims, system performance issues, data backup status, or some other operational condition.",
+      "original_ddc": "MISSING",
+      "condition": "vanilla_rag",
+      "gpt4_raw": "NOT_ANSWERABLE",
+      "gpt4_ddc": "MISSING"
+    }
+  ]
+}

@@ -1,0 +1,352 @@
+[
+  {
+    "question": "What happens to a claim from the moment it enters the Claims Gateway until payment is issued?",
+    "topic": "claims flow",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "Which team is responsible for maintaining the Rules Engine system?",
+    "topic": "team ownership",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What does it mean when a claim is 'pended' during adjudication?",
+    "topic": "claim status",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "How does the Rules Engine determine whether to pay, deny, or pend a claim?",
+    "topic": "adjudication logic",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What is the difference between an ERA and an EOB?",
+    "topic": "payment documents",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "Which system handles member deductible tracking and out-of-pocket maximums?",
+    "topic": "member benefits",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What percentage of prior authorization requests does Clearview target for auto-approval?",
+    "topic": "pre-auth targets",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "How often are the fraud detection models retrained?",
+    "topic": "fraud models",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What fraud detection score threshold triggers a hold for SIU review?",
+    "topic": "fraud thresholds",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "Which team owns the Provider Directory system?",
+    "topic": "system ownership",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What types of claim submission formats does the Claims Gateway accept?",
+    "topic": "gateway inputs",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What does COB stand for and when does it apply?",
+    "topic": "benefits coordination",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "How many members does Clearview Health Plans cover?",
+    "topic": "company size",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What is an NPI and why is it important in claims processing?",
+    "topic": "provider identification",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "Which system generates the 835 remittance advice files?",
+    "topic": "payment processing",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What happens when the Claims Gateway detects a duplicate claim submission?",
+    "topic": "duplicate handling",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "How does the Eligibility Service support the adjudication process?",
+    "topic": "eligibility integration",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What does 'allowed amount' refer to in claims processing?",
+    "topic": "payment terms",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "Which team would I contact about issues with digital ID cards on the member portal?",
+    "topic": "support escalation",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What triggers a void and reissue process in the Payment Engine?",
+    "topic": "payment corrections",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "How does Pre-Auth Service route complex authorization cases?",
+    "topic": "auth routing",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What information does the Provider Directory maintain about contracted providers?",
+    "topic": "provider data",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What does it mean when someone says 'the gateway is backed up'?",
+    "topic": "system status",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "When a claim requires both fraud review and prior authorization, how do these processes interact across the different systems?",
+    "topic": "cross-system flow",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "If a member's eligibility status changes mid-month, how does this impact claims that are already in the adjudication pipeline across multiple teams' systems?",
+    "topic": "eligibility changes",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What is the high-level flow of a claim from submission to payment?",
+    "topic": "Claims Process",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "behavioral"
+  },
+  {
+    "question": "What happens when the Rules Engine determines a claim should be pended?",
+    "topic": "Claim Adjudication",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "behavioral"
+  },
+  {
+    "question": "How does the Fraud Detection system determine which claims to hold for review?",
+    "topic": "Fraud Scoring",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "decision"
+  },
+  {
+    "question": "What is an EDI 837 file and where does it come from?",
+    "topic": "Data Formats",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "reference"
+  },
+  {
+    "question": "Who is responsible for keeping provider credentials up to date?",
+    "topic": "Provider Data",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "organizational"
+  },
+  {
+    "question": "How does the Payment Engine know how much to pay a provider for a claim?",
+    "topic": "Payment Logic",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "behavioral"
+  },
+  {
+    "question": "Which systems are involved when a provider submits a prior authorization request?",
+    "topic": "Authorization Flow",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "structural"
+  },
+  {
+    "question": "What is the purpose of ERA 835 remittance advice?",
+    "topic": "Payment Documents",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "language"
+  },
+  {
+    "question": "What validation does the Claims Gateway perform before routing claims downstream?",
+    "topic": "Gateway Validation",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "behavioral"
+  },
+  {
+    "question": "What is Coordination of Benefits and when does it apply?",
+    "topic": "COB Process",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "language"
+  },
+  {
+    "question": "Which team would handle an issue with member deductible calculations?",
+    "topic": "Issue Ownership",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "organizational"
+  },
+  {
+    "question": "What information can members access through the Member Portal?",
+    "topic": "Portal Features",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "structural"
+  },
+  {
+    "question": "How does the system handle duplicate claim submissions?",
+    "topic": "Duplicate Detection",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "behavioral"
+  },
+  {
+    "question": "What happens when a provider needs to void and reissue a payment?",
+    "topic": "Payment Corrections",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "behavioral"
+  },
+  {
+    "question": "Which systems need to be updated when a provider's contract terms change?",
+    "topic": "Contract Updates",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "How does the Rules Engine access current fee schedules for providers?",
+    "topic": "Fee Schedules",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "behavioral"
+  },
+  {
+    "question": "What triggers a claim to be sent for manual review instead of auto-adjudication?",
+    "topic": "Manual Review",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "decision"
+  },
+  {
+    "question": "How many members does Clearview cover and across which geographic area?",
+    "topic": "Company Scale",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "reference"
+  },
+  {
+    "question": "What happens when fraud is detected after a claim has already been paid?",
+    "topic": "Post-payment Fraud",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "behavioral"
+  },
+  {
+    "question": "How do changes in member enrollment status flow from source systems to claims processing?",
+    "topic": "Enrollment Updates",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "Which team would I contact if there's an issue with member deductible tracking not updating correctly?",
+    "topic": "team ownership",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "organizational"
+  },
+  {
+    "question": "What are the three possible outcomes when the Rules Engine processes a claim?",
+    "topic": "rules engine",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "reference"
+  },
+  {
+    "question": "How does the Claims Gateway determine whether an incoming claim is a duplicate?",
+    "topic": "duplicate detection",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "behavioral"
+  },
+  {
+    "question": "Which systems need to communicate when processing a claim that requires coordination of benefits with another insurer?",
+    "topic": "COB workflow",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": ""
+  },
+  {
+    "question": "What is an NPI and which systems in our architecture would need to store or validate this information?",
+    "topic": "provider identification",
+    "source": "seed",
+    "source_file": "seed-context",
+    "layer_hint": "structural"
+  }
+]

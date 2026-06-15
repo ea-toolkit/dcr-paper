@@ -579,26 +579,27 @@ Thin coverage & 7 & high & Content density insufficient \\
 
 % Orphan entity example
 \node[label] at (-3.5, 0.5) {(a) Orphan Entity};
-\node[entity, fill=blue!10] (e1) at (-2, -0.3) {Claims Gateway};
-\node[entity, fill=blue!10] (e2) at (1.5, -0.3) {Rules Engine};
-\node[entity, fill=purple!10] (e3) at (-0.2, -1.3) {Claims Operations};
-\draw[edge] (e1) -- node[above, font=\tiny] {depends\_on} (e2);
+\node[entity, fill=blue!10] (e1) at (-2.3, -0.3) {Claims Gateway};
+\node[entity, fill=blue!10] (e2) at (2.0, -0.3) {Rules Engine};
+\node[entity, fill=purple!10] (e3) at (-0.2, -1.5) {Claims Operations};
+\draw[edge] (e1) -- node[above, font=\tiny, yshift=2pt] {\texttt{depends\_on}} (e2);
 \draw[noedge] (e3) -- (-0.2, -0.6);
-\node[font=\tiny, text=red!60!black, anchor=west] at (0.0, -1.8) {no typed relationships};
+\node[font=\tiny, text=red!60!black, anchor=west] at (0.0, -2.0) {no typed relationships};
 
 % Ambiguous entity example
-\node[label] at (-3.5, -2.5) {(b) Ambiguous Entity};
-\node[entity, fill=green!10] (a1) at (-1.5, -3.3) {Claims API v1};
-\node[entity, fill=green!10] (a2) at (1.8, -3.3) {Claims API v2};
-\draw[thick, dotted, orange!70!black, <->] (a1) -- node[above, font=\tiny] {overlap?} (a2);
-\node[font=\tiny, text=orange!60!black, anchor=west] at (-1.0, -3.9) {same entity or distinct versions?};
+\node[label] at (-3.5, -2.8) {(b) Ambiguous Entity};
+\node[entity, fill=green!10] (a1) at (-2.2, -3.6) {Claims API v1};
+\node[entity, fill=green!10] (a2) at (2.5, -3.6) {Claims API v2};
+\draw[thick, dotted, orange!70!black, <->] (a1) -- node[above, font=\tiny, yshift=2pt] {overlap?} (a2);
+\node[font=\tiny, text=orange!60!black, anchor=west] at (-1.0, -4.2) {same entity or distinct versions?};
 
 % Thin coverage example
-\node[label] at (-3.5, -4.7) {(c) Thin Coverage};
-\node[entity, fill=gray!10] (c1) at (-2.3, -5.5) {\color{gray!60}entity};
-\node[entity, fill=gray!10] (c2) at (-0.3, -5.5) {\color{gray!60}entity};
-\node[entity, fill=gray!10] (c3) at (1.7, -5.5) {\color{gray!60}entity};
-\node[font=\tiny, text=red!60!black, align=center] at (-0.3, -6.2) {15 entities retrieved but content density\\insufficient to answer};
+\node[label] at (-3.5, -5.0) {(c) Thin Coverage};
+\node[entity, fill=gray!10] (c1) at (-2.5, -5.8) {\color{gray!60}entity};
+\node[entity, fill=gray!10] (c2) at (-0.5, -5.8) {\color{gray!60}entity};
+\node[font=\scriptsize, text=gray!50] at (1.0, -5.8) {\dots};
+\node[entity, fill=gray!10] (c3) at (2.0, -5.8) {\color{gray!60}entity};
+\node[font=\tiny, text=red!60!black, align=center] at (-0.3, -6.5) {15 entities retrieved but content density\\insufficient to answer};
 
 \end{tikzpicture}
 \caption{The three gap detection types with examples from the experiment. (a)~Orphan entities have high retrieval relevance but no typed relationships to other results. (b)~Ambiguous entities share names or content across different types. (c)~Thin coverage: the entity count meets the threshold but content lacks depth. Thin coverage gaps (c) correlate with MISSING outcomes (7/7).}

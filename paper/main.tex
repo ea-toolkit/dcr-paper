@@ -337,7 +337,7 @@ We evaluate 9 retrieval conditions: 3 baselines and 6 ablation variants.
 
 \subsection{Scoring}
 
-Each retrieved context is passed to Claude Sonnet\footnote{Model ID: \texttt{claude-sonnet-4-6} (API identifier \texttt{claude-4-sonnet-20250514}), Anthropic's Claude Sonnet 4 release (May 2025). Accessed via Anthropic API.} for synthesis and self-scoring in a single LLM call. The model generates an answer with entity citations and, on the final line, self-scores as ANSWERABLE, PARTIAL, or NOT\_ANSWERABLE. We map these to:
+Each retrieved context is passed to Claude Sonnet\footnote{Model ID: \texttt{claude-sonnet-4-20250514} (Anthropic's Claude Sonnet 4 release, May 2025). Accessed via Anthropic API.} for synthesis and self-scoring in a single LLM call. The model generates an answer with entity citations and, on the final line, self-scores as ANSWERABLE, PARTIAL, or NOT\_ANSWERABLE. We map these to:
 
 \begin{itemize}[nosep]
   \item \textbf{CLEAN}: the knowledge base fully addresses the question.
@@ -730,9 +730,9 @@ P.~Lewis, E.~Perez, A.~Piktus, F.~Petroni, V.~Karpukhin, N.~Goyal, H.~K{\"u}ttle
 \newblock In \emph{NeurIPS}, 2020.
 
 \bibitem[Liu et~al.(2025)]{liu2025consjudge}
-S.~Liu, J.~Li, Y.~Cao, and others.
+S.~Liu, X.~Li, Z.~Liu, Y.~Yan, C.~Yang, Z.~Zeng, Z.~Liu, M.~Sun, and G.~Yu.
 \newblock Judge as a judge: Improving the evaluation of retrieval-augmented generation through the judge-consistency of large language models.
-\newblock In \emph{Findings of ACL}, 2025.
+\newblock In \emph{Findings of ACL}, pages 5788--5807, 2025.
 
 \bibitem[Press et~al.(2023)]{press2023selfask}
 O.~Press, M.~Zhang, S.~Min, L.~Schmidt, N.~A.~Smith, and M.~Lewis.

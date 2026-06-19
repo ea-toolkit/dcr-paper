@@ -1,0 +1,108 @@
+{
+  "question_classification": {
+    "cross_cutting": 28,
+    "single_layer": 22
+  },
+  "gap_detection_dcr_avg": {
+    "trigger_rate_pct": 80.0,
+    "trigger_rate_sd": 0.0,
+    "signals_per_trial": 62,
+    "gap_types": {
+      "ambiguous_entity": 111,
+      "orphan_entity": 75
+    }
+  },
+  "statistical_tests": {
+    "missing_dcr_vs_rag": {
+      "a_missing": 0,
+      "a_total": 150,
+      "b_missing": 3,
+      "b_total": 150,
+      "test": "fisher_exact",
+      "odds_ratio": 0.0,
+      "p_value": 0.2475
+    },
+    "quality_dcr_vs_rag": {
+      "test": "mann_whitney_u",
+      "u_statistic": 13179.0,
+      "p_value": 0.001571,
+      "a_mean": 2.76,
+      "b_mean": 2.573,
+      "a_n": 150,
+      "b_n": 150
+    },
+    "kruskal_wallis_baselines": {
+      "test": "kruskal_wallis",
+      "h_statistic": 10.349,
+      "p_value": 0.005659,
+      "conditions": [
+        "naive_vector",
+        "vanilla_rag",
+        "dcr"
+      ],
+      "group_sizes": [
+        150,
+        150,
+        150
+      ]
+    }
+  },
+  "stratified_pooled": {
+    "naive_vector": {
+      "cross-cutting": {
+        "n": 84,
+        "clean_pct": 72.6,
+        "inc_pct": 27.4,
+        "miss_pct": 0.0
+      },
+      "single-layer": {
+        "n": 66,
+        "clean_pct": 65.2,
+        "inc_pct": 34.8,
+        "miss_pct": 0.0
+      }
+    },
+    "vanilla_rag": {
+      "cross-cutting": {
+        "n": 84,
+        "clean_pct": 59.5,
+        "inc_pct": 36.9,
+        "miss_pct": 3.6
+      },
+      "single-layer": {
+        "n": 66,
+        "clean_pct": 59.1,
+        "inc_pct": 40.9,
+        "miss_pct": 0.0
+      }
+    },
+    "dcr": {
+      "cross-cutting": {
+        "n": 84,
+        "clean_pct": 76.2,
+        "inc_pct": 23.8,
+        "miss_pct": 0.0
+      },
+      "single-layer": {
+        "n": 66,
+        "clean_pct": 75.8,
+        "inc_pct": 24.2,
+        "miss_pct": 0.0
+      }
+    },
+    "full_dcr": {
+      "cross-cutting": {
+        "n": 84,
+        "clean_pct": 73.8,
+        "inc_pct": 26.2,
+        "miss_pct": 0.0
+      },
+      "single-layer": {
+        "n": 66,
+        "clean_pct": 69.7,
+        "inc_pct": 30.3,
+        "miss_pct": 0.0
+      }
+    }
+  }
+}

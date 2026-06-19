@@ -432,7 +432,11 @@ class RetrievalPipeline:
     def _stage5_context(
         self, results: list[ScoredEntity], understanding: QueryUnderstanding,
     ) -> tuple[str, list[RetrievalHop]]:
-        """Build context text for LLM and generate retrieval trace."""
+        """Build context text for LLM and generate retrieval trace.
+
+        Includes entity body content with score-weighted token allocation:
+        each entity gets a share of the budget proportional to its retrieval score.
+        """
         hops: list[RetrievalHop] = []
         context_parts: list[str] = []
         tokens_used = 0
@@ -453,21 +457,38 @@ class RetrievalPipeline:
                 if by_layer[layer]:
                     interleaved.append(by_layer[layer].pop(0))
 
+        # Score-weighted token allocation per entity
+        total_score = sum(e.score for e in interleaved) or 1.0
+        TOKEN_FLOOR = 250
+        TOKEN_CEILING = 2500
+
         for entity in interleaved:
-            # Build context block
+            # Calculate this entity's body token budget
+            raw_share = int(self.token_budget * (entity.score / total_score))
+            body_token_budget = max(TOKEN_FLOOR, min(TOKEN_CEILING, raw_share))
+
+            # Build header
             block = f"Entity: {entity.name} ({entity.entity_type}, confidence: {entity.confidence:.0%})\n"
             block += f"Description: {entity.description}\n"
 
-            # Add relationships
+            # Relationships
             rels = [f"  {r['type']} → {r['target_id']}" for r in entity.relationships[:5]]
             if rels:
                 block += "Relationships:\n" + "\n".join(rels) + "\n"
 
-            # Add source provenance
             if entity.source_documents:
-                block += f"Sources: {', '.join(entity.source_documents[:3])}\n"
+                block += f"Source: {entity.source_documents[0]}\n"
 
-            # Token budget check (approximate: 1 token ≈ 4 chars)
+            # Include entity body content (strip Open Questions, then first-N truncation)
+            body_text = entity.body.strip() if entity.body else ""
+            if body_text:
+                body_text = re.split(r'\n##\s*Open Questions', body_text)[0].strip()
+            if body_text:
+                body_char_budget = body_token_budget * 4
+                if len(body_text) > body_char_budget:
+                    body_text = body_text[:body_char_budget].rsplit("\n", 1)[0] + "\n[...]"
+                block += f"\n{body_text}\n"
+
             block_tokens = len(block) // 4
             if tokens_used + block_tokens > self.token_budget:
                 break

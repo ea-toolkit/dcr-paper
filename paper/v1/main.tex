@@ -62,7 +62,7 @@
 % ABSTRACT
 % =============================================================================
 \begin{abstract}
-Retrieval-augmented generation (RAG) systems typically treat knowledge bases as flat document collections, ignoring structural metadata about entity types, knowledge layers, and typed relationships. We present \textbf{Domain-Constrained Retrieval (DCR)}, a seven-stage retrieval pipeline designed for typed, layered knowledge bases built using the Demand-Driven Context (DDC) methodology. DCR introduces intent-aware query classification, typed graph traversal, confidence-weighted scoring, multi-layer deduplication, and \textbf{gap detection}---a novel mechanism that converts retrieval dead-ends into structured curation signals. We evaluate DCR against two baselines (naive vector search and vanilla RAG) on a synthetic healthcare claims knowledge base containing 410 entities across 15 types and 6 layers, using 50 evaluation questions across 3 independent trials per condition (1,350 total evaluations). DCR achieves 76.0\% CLEAN answers compared to 59.3\% for vanilla RAG (+16.7 percentage points, $\chi^2 = 8.78$, $p = 0.003$) with near-perfect cross-trial consistency (96\% per-question stability). A surprising baseline result---naive vector search (69.3\% CLEAN) outperforming vanilla RAG (59.3\%)---reveals that the \emph{typed ontology} underlying the knowledge base is the primary quality driver, not the retrieval pipeline. Stage-by-stage ablation confirms this: no individual pipeline stage produces a statistically significant quality change, though graph traversal shows a consistent positive effect. Gap detection fires on 80\% of questions, producing 62 structured curation signals per evaluation, independent of answer quality. We discuss the \emph{synthesis bottleneck}---the finding that context content richness dominates retrieval strategy as a determinant of answer quality---and its implications for RAG system design.
+Retrieval-augmented generation (RAG) systems typically treat knowledge bases as flat document collections, ignoring structural metadata about entity types, knowledge layers, and typed relationships. We present \textbf{Domain-Constrained Retrieval (DCR)}, a seven-stage retrieval pipeline designed for typed, layered knowledge bases built using the Demand-Driven Context (DDC) methodology. DCR introduces intent-aware query classification, typed graph traversal, confidence-weighted scoring, multi-layer deduplication, and \textbf{gap detection}---a novel mechanism that converts retrieval dead-ends into structured curation signals. We evaluate DCR against two baselines (naive vector search and vanilla RAG) on a synthetic healthcare claims knowledge base containing 410 entities across 15 types and 6 layers, using 50 evaluation questions across 3 independent trials per condition (1,350 total evaluations). DCR achieves 76.0\% CLEAN answers compared to 59.3\% for vanilla RAG (+16.7 percentage points, $\chi^2 = 8.78$, $p = 0.003$) with near-perfect cross-trial consistency (96\% per-question stability). A surprising baseline result---naive vector search (69.3\% CLEAN) outperforming vanilla RAG (59.3\%)---reveals that the \emph{typed ontology} underlying the knowledge base is the primary quality driver, not the retrieval pipeline. Stage-by-stage ablation confirms this: no individual pipeline stage produces a statistically significant quality change (all $p > 0.43$), though graph traversal shows the largest directional positive effect. Gap detection fires on 80\% of questions, producing 62 structured curation signals per evaluation, independent of answer quality. We propose the \emph{synthesis bottleneck hypothesis}---that context content richness may dominate retrieval strategy as a determinant of answer quality---and discuss its implications for RAG system design.
 \end{abstract}
 
 \noindent\textbf{Keywords:} retrieval-augmented generation, typed knowledge bases, gap detection, domain-constrained retrieval, knowledge curation, entity-relationship retrieval
@@ -98,7 +98,7 @@ We evaluate DCR on a synthetic healthcare claims knowledge base containing 410 e
   \item Gap detection fires on 80\% of questions regardless of answer quality, producing 62 structured curation signals per evaluation---an observability mechanism for knowledge base health, not a retrieval confidence signal.
 \end{enumerate}
 
-The remainder of this paper is organized as follows. Section~\ref{sec:related} surveys related work. Section~\ref{sec:background} describes the typed knowledge base meta-model. Section~\ref{sec:pipeline} details the DCR pipeline architecture. Section~\ref{sec:setup} presents the experimental setup. Section~\ref{sec:results} reports baseline results. Section~\ref{sec:ablation} analyzes stage contributions. Section~\ref{sec:gaps} examines gap detection. Section~\ref{sec:discussion} discusses implications including the synthesis bottleneck. Section~\ref{sec:limitations} addresses limitations, and Section~\ref{sec:conclusion} concludes.
+The remainder of this paper is organized as follows. Section~\ref{sec:related} surveys related work. Section~\ref{sec:background} describes the typed knowledge base meta-model. Section~\ref{sec:pipeline} details the DCR pipeline architecture. Section~\ref{sec:setup} presents the experimental setup. Section~\ref{sec:results} reports baseline results. Section~\ref{sec:ablation} analyzes stage contributions. Section~\ref{sec:gaps} examines gap detection. Section~\ref{sec:discussion} discusses implications including the synthesis bottleneck hypothesis. Section~\ref{sec:limitations} addresses limitations, and Section~\ref{sec:conclusion} concludes.
 
 % =============================================================================
 % 2. RELATED WORK
@@ -312,7 +312,7 @@ backlog when Eligibility Service timeouts triggered
 503 errors in the Claims Gateway.
 ---
 \end{lstlisting}
-\caption{A typed context block as assembled in Stage~6 for a well-connected entity. Each block contains the entity's full body text alongside typed metadata (type, layer, confidence, relationships). The distinction between this rich context and metadata-only context (name, type, description) is central to the synthesis bottleneck finding (Section~\ref{sec:discussion}).}
+\caption{A typed context block as assembled in Stage~6 for a well-connected entity. Each block contains the entity's full body text alongside typed metadata (type, layer, confidence, relationships). The richness of this context---compared to metadata-only representations---is central to the synthesis bottleneck hypothesis (Section~\ref{sec:discussion}).}
 \label{fig:context-block}
 \end{figure}
 
@@ -449,7 +449,7 @@ DCR & 255 & 11{,}294 & 11{,}568 \\
 \subsection{Judge Consistency}
 \label{sec:judge}
 
-We assessed cross-model reliability by re-scoring 30 (question, answer) pairs using GPT-4o as an independent judge: 15 from DCR and 15 from vanilla RAG, each proportionally stratified by actual DDC class distribution. Cross-model agreement with Claude's original scoring was 80.0\% (24/30). Cohen's $\kappa = 0.47$ (moderate agreement). The relatively low kappa despite 80\% raw agreement reflects the skewed class distribution: with $>$70\% of answers classified as CLEAN, chance agreement is high, which mechanically depresses $\kappa$. All 6 disagreements were one-directional \emph{promotions} (INCOMPLETE~$\to$~CLEAN), with 3 per condition---affecting both conditions equally and preserving the relative comparison. GPT-4o confirmed the DCR quality advantage: 14/15 DCR answers scored CLEAN vs.\ 12/15 for vanilla RAG.
+We assessed cross-model reliability by re-scoring 30 (question, answer) pairs using GPT-4o as an independent judge: 15 from DCR and 15 from vanilla RAG, each proportionally stratified by actual DDC class distribution. Cross-model agreement with Claude's original scoring was 80.0\% (24/30; 95\% CI: 61--92\%). Cohen's $\kappa = 0.47$ (moderate agreement). The relatively low kappa despite 80\% raw agreement reflects the skewed class distribution: with $>$70\% of answers classified as CLEAN, chance agreement is high, which mechanically depresses $\kappa$. All 6 disagreements were one-directional \emph{promotions} (INCOMPLETE~$\to$~CLEAN), with 3 per condition---affecting both conditions equally and preserving the relative comparison. GPT-4o confirmed the DCR quality advantage: 14/15 DCR answers scored CLEAN vs.\ 12/15 for vanilla RAG.
 
 % =============================================================================
 % 6. RESULTS
@@ -459,7 +459,7 @@ We assessed cross-model reliability by re-scoring 30 (question, answer) pairs us
 
 \subsection{Baseline Comparison}
 
-Table~\ref{tab:baselines} and Figure~\ref{fig:baselines} show the baseline comparison. DCR achieves 76.0\% CLEAN, a 16.7 percentage point improvement over vanilla RAG (59.3\%) and a 6.7pp improvement over naive vector search (69.3\%).
+Table~\ref{tab:baselines} and Figure~\ref{fig:baselines} show the baseline comparison. DCR achieves 76.0\% CLEAN, a 16.7 percentage point improvement over vanilla RAG (59.3\%) and a 6.7pp improvement over naive vector search (69.3\%). Because all conditions share the same evaluation questions and vocabulary alignment bias (Section~\ref{sec:setup}), relative comparisons are valid even if absolute CLEAN rates are inflated by the question generation process.
 
 \begin{table}[t]
 \centering
@@ -623,7 +623,7 @@ no\_dedup & $74.0 \pm 0.0$ & $26.0 \pm 0.0$ & $0.0 \pm 0.0$ & $+2.0$ \\
 \addplot[fill=blue!50] coordinates {(4.0,no\_intent) (2.0,no\_dedup) (2.0,no\_layer\_boost) (0.0,no\_confidence) (-4.0,no\_graph)};
 \end{axis}
 \end{tikzpicture}
-\caption{Ablation: change in CLEAN rate when each stage is removed, relative to the full\_dcr control. No individual stage produces a statistically significant effect (all $p > 0.43$). Graph traversal shows the largest negative impact ($-4.0$pp); intent classification shows the largest positive impact ($+4.0$pp).}
+\caption{Ablation: change in CLEAN rate when each stage is removed, relative to the full\_dcr control. No individual stage produces a statistically significant effect (all $p > 0.43$). Graph traversal shows the largest directional negative impact ($-4.0$pp, $p = 0.451$); intent classification shows the largest directional positive impact ($+4.0$pp, $p = 0.431$).}
 \label{fig:ablation}
 \end{figure}
 
@@ -652,12 +652,12 @@ This result does not mean the stages are useless. The typed pipeline as a whole 
 
 \subsection{Directional Observations}
 
-While not statistically significant, three directional patterns emerge:
+While no individual result reaches statistical significance (all $p > 0.43$), three directional patterns are worth noting as hypotheses for future investigation:
 
 \begin{enumerate}[nosep]
-  \item \textbf{Graph traversal helps.} Removing graph search produces the largest negative effect ($-4.0$pp) and the lowest stability (82\%). Graph-retrieved entities provide structurally connected context that vector similarity alone misses.
-  \item \textbf{Intent classification may hurt on dense KBs.} Removing intent classification produces the largest \emph{positive} effect ($+4.0$pp). On a 410-entity knowledge base where most types are well-represented, intent-based layer weighting may overly restrict the candidate pool. This pattern is consistent with the hypothesis that typed stages are density-dependent, though we have not tested this at other scales (see Section~\ref{sec:limitations}).
-  \item \textbf{Confidence scoring is neutral.} Removing confidence scoring produces zero change in CLEAN rate. On a knowledge base where most entities have high confidence scores (a consequence of thorough DDC curation), confidence weighting provides no discriminative signal.
+  \item \textbf{Graph traversal shows the largest directional positive effect.} Removing graph search produces a $-4.0$pp change ($p = 0.451$) and the lowest stability (82\%). This falls below statistical significance at this sample size, but the co-occurrence with reduced stability suggests graph-retrieved entities may provide structurally connected context that vector similarity alone misses. Confirmation requires larger-scale evaluation.
+  \item \textbf{Intent classification shows a directional negative effect on this dense KB.} Removing intent classification produces the largest \emph{positive} change ($+4.0$pp, $p = 0.431$). On a 410-entity knowledge base where most types are well-represented, intent-based layer weighting may overly restrict the candidate pool. This is consistent with the hypothesis that typed stages are density-dependent, though a $+4.0$pp effect at $p = 0.431$ is also consistent with no effect. Validation at other knowledge base scales is needed (see Section~\ref{sec:limitations}).
+  \item \textbf{Confidence scoring is neutral.} Removing confidence scoring produces zero change in CLEAN rate ($p = 1.000$). On a knowledge base where most entities have high confidence scores (a consequence of thorough DDC curation), confidence weighting provides no discriminative signal.
 \end{enumerate}
 
 % =============================================================================
@@ -668,7 +668,7 @@ While not statistically significant, three directional patterns emerge:
 
 \subsection{Gap Signal Distribution}
 
-Table~\ref{tab:gaps} summarizes gap detection behavior across conditions. Gap detection only fires in DCR-family conditions (those that include typed graph traversal and relationship analysis). Baseline conditions (naive vector and vanilla RAG) produce zero gap signals because they lack the structural analysis required to identify orphan entities and ambiguous types.
+Table~\ref{tab:gaps} summarizes gap detection behavior across conditions. Gap detection only fires in DCR-family conditions (those that include typed graph traversal and relationship analysis). Baseline conditions (naive vector and vanilla RAG) produce zero gap signals because they lack the structural analysis required to identify orphan entities and ambiguous types. Among DCR-family conditions, trigger rates range from 64\% (no\_intent) to 82\% (no\_confidence). The slight increase for no\_confidence (82\% vs.\ DCR's 80\%) occurs because removing confidence-based ranking changes which entities are retrieved, exposing two additional questions to gap-triggering retrieval patterns.
 
 \begin{table}[t]
 \centering
@@ -700,7 +700,7 @@ This does not invalidate the thin-coverage mechanism---it indicates that the cur
 
 \subsection{Gap Detection as Curation Feedback}
 
-The consistent 80\% trigger rate and 62 signals per evaluation, \emph{independent of answer quality}, position gap detection as an observability mechanism rather than a confidence metric. Every query surfaces structural information about the knowledge base:
+For the full DCR pipeline specifically, the consistent 80\% trigger rate and 62 signals per evaluation, \emph{independent of answer quality}, position gap detection as an observability mechanism rather than a confidence metric. Signal counts vary across ablation conditions (Table~\ref{tab:gaps}), but the pattern holds: every query surfaces structural information about the knowledge base:
 
 \begin{itemize}[nosep]
   \item \textbf{Orphan entities} (25 per evaluation): entities retrieved with high relevance but no relationships to co-retrieved entities, indicating missing documentation of how these entities connect to the broader domain.
@@ -715,13 +715,15 @@ These signals feed directly back into the DDC curation cycle~\citep{navakoti2026
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{The Synthesis Bottleneck}
+\subsection{The Synthesis Bottleneck Hypothesis}
 
-RAG system design implicitly assumes that retrieval quality is the primary lever for answer quality. Our results, combined with an inadvertent ablation during development, suggest a different bottleneck: \emph{the richness of content that reaches the synthesis LLM matters more than how it was selected}.
+RAG system design implicitly assumes that retrieval quality is the primary lever for answer quality. Our results suggest a different bottleneck: \emph{the richness of content that reaches the synthesis LLM may matter more than how it was selected}.
 
-During development, a bug in the synthesis stage caused only entity metadata (name, type, description, relationship IDs) to be passed to the LLM, rather than the full entity body text shown in Figure~\ref{fig:context-block}. The same pipeline, the same retrieval stages, and the same questions produced radically different results depending on whether the LLM received metadata-only or full-text context. This inadvertent ablation of \emph{context content richness} produced larger effect sizes than any retrieval stage ablation---evidence for a principle we term the \emph{synthesis bottleneck}: context composition quality sets the ceiling on answer quality, and no retrieval improvement can compensate for shallow content.
+Consider the evidence from our experiment. Naive vector search achieves 69.3\% CLEAN using only cosine similarity---no typed stages, no graph traversal, no fusion---yet it outperforms vanilla RAG (59.3\%), which adds keyword search but degrades signal quality through score averaging. The full DCR pipeline adds 6.7pp over naive vector (76.0\% vs.\ 69.3\%), a meaningful but modest lift given the pipeline's additional complexity. Meanwhile, all conditions share the same rich typed context blocks (Figure~\ref{fig:context-block}), which include full entity body text, type metadata, confidence scores, and relationship summaries. The content reaching the LLM is identical in richness across conditions; only the \emph{selection} of which entities appear differs.
 
-This principle generalizes beyond our specific implementation. In any RAG system, even perfect retrieval produces poor answers if the context window contains shallow, poorly-curated, or metadata-only content. The implication for practitioners is that investments in knowledge base curation quality---the depth and richness of entity descriptions---may yield larger returns than investments in retrieval pipeline sophistication. Our typed context blocks (Figure~\ref{fig:context-block}) are designed to maximize the richness of the synthesis input, which is why DCR's architecture treats curation quality (Stage~4) and context composition (Stage~5--6) as first-class pipeline concerns rather than afterthoughts.
+This pattern is consistent with what we term the \emph{synthesis bottleneck hypothesis}: context composition quality sets a ceiling on answer quality, and beyond a threshold of retrieval adequacy, further retrieval sophistication yields diminishing returns. On our well-curated 410-entity knowledge base, even the simplest retrieval method already selects relevant entities---leaving little room for pipeline improvements to change the synthesis outcome.
+
+We frame this as a hypothesis rather than a confirmed principle: our experiment varies retrieval strategy but not context richness (all conditions use full-text context blocks). A controlled study that systematically varies both retrieval method and context depth---e.g., comparing metadata-only versus full-text context across retrieval conditions---would be needed to isolate the synthesis bottleneck as an independent effect. Nevertheless, the practical implication is suggestive: investments in knowledge base curation quality---the depth and richness of entity descriptions---may yield larger returns than investments in retrieval pipeline sophistication. DCR's architecture reflects this by treating context composition (Stages~5--6) as a first-class pipeline concern rather than an afterthought.
 
 \subsection{Typed Ontology vs.\ Typed Retrieval}
 
@@ -744,7 +746,7 @@ This aligns with the DDC methodology's incremental curation approach: as cycles 
 
 \subsection{Full DCR vs.\ DCR Baseline Variance}
 
-The full\_dcr control condition (72.0\% CLEAN) differs from the DCR baseline (76.0\% CLEAN) by 4.0pp, despite using identical pipelines. This gap reflects inter-batch LLM scoring variance---the same (question, context) pairs scored in different trial batches can produce different classifications. This variance is inherent to LLM-as-judge evaluation and should be factored into the interpretation of all results. Our ablation comparisons use full\_dcr (not the DCR baseline) as the reference to ensure fair within-batch comparison.
+The full\_dcr control condition (72.0\% $\pm$ 2.0 CLEAN) differs from the DCR baseline (76.0\% $\pm$ 0.0 CLEAN) by 4.0pp, despite using identical pipelines. This gap reflects inter-batch LLM scoring variance: the two conditions were run in separate trial batches (baseline batch vs.\ ablation batch), and the same (question, context) pairs scored at different times can produce different classifications due to non-determinism in LLM inference. Notably, DCR shows zero cross-trial variance while full\_dcr varies across trials (74\%, 72\%, 70\%), suggesting that the 4.0pp gap may partly reflect an unlucky scoring draw in the ablation batch rather than a systematic difference. The gap is within the range of scoring variance observed across conditions (SD up to 3.5pp). All ablation comparisons use full\_dcr (not the DCR baseline) as the reference to ensure fair within-batch comparison.
 
 % =============================================================================
 % 10. LIMITATIONS AND REPRODUCIBILITY
@@ -757,7 +759,7 @@ The full\_dcr control condition (72.0\% CLEAN) differs from the DCR baseline (76
 \begin{itemize}[nosep]
   \item \textbf{Single knowledge base.} All experiments use one synthetic domain. Generalization to other domains, knowledge base sizes, and entity type distributions is not established.
   \item \textbf{Synthetic data.} The knowledge base was generated and curated, not extracted from a production environment. Production knowledge bases may have different quality distributions, particularly lower average confidence scores.
-  \item \textbf{LLM judge with self-scoring.} The same model generates and scores answers, introducing potential self-enhancement bias~\citep{zheng2023judging}. Our GPT-4o cross-model check ($n = 30$, 80\% agreement, $\kappa = 0.47$) shows identical promotion patterns across conditions, suggesting the bias does not distort relative comparisons. However, absolute DDC class rates may differ under human evaluation.
+  \item \textbf{LLM judge with self-scoring.} The same model generates and scores answers, introducing potential self-enhancement bias~\citep{zheng2023judging}. Our GPT-4o cross-model check ($n = 30$, 80\% agreement [95\% CI: 61--92\%], $\kappa = 0.47$) shows identical promotion patterns across conditions, suggesting the bias does not distort relative comparisons. The wide confidence interval reflects the small validation sample; absolute DDC class rates may differ under human evaluation.
   \item \textbf{No $K$ sensitivity analysis.} The top-$K$ retrieval threshold ($K = 81$, approximately 20\% of entity count) was not ablated. Different $K$ values may affect both baseline and DCR results.
   \item \textbf{Small question set.} 50 questions provide adequate power for the CLEAN comparison ($p = 0.003$) but limit per-question-type analysis and prevent detection of small ablation effects. The non-significant ablation results may reflect insufficient statistical power rather than true null effects.
   \item \textbf{LLM-generated questions.} Evaluation questions were generated by an LLM from seed context rather than drawn from real user queries, potentially biasing the question distribution.
@@ -767,7 +769,7 @@ The full\_dcr control condition (72.0\% CLEAN) differs from the DCR baseline (76
 
 \subsection{Reproducibility}
 
-We release the pipeline implementation, evaluation questions, knowledge base, and all 1,350 checkpoint files (one per evaluation, containing the question, retrieved entities, synthesized answer, DDC classification, gap signals, and retrieval trace metadata). Trial-level and aggregate statistics are computed from these checkpoints. An earlier version of this experiment contained a synthesis pipeline bug that passed only entity metadata to the LLM rather than full body text; the results in this paper are from the corrected pipeline. Both versions of the code and their respective results are preserved in the repository for transparency.\footnote{\url{https://github.com/ea-toolkit/dcr-paper}}
+We release the pipeline implementation, evaluation questions, knowledge base, and all 1,350 checkpoint files (one per evaluation, containing the question, retrieved entities, synthesized answer, DDC classification, gap signals, and retrieval trace metadata). Trial-level and aggregate statistics are computed from these checkpoints.\footnote{\url{https://github.com/ea-toolkit/dcr-paper}}
 
 % =============================================================================
 % 11. CONCLUSION
@@ -779,9 +781,9 @@ We presented Domain-Constrained Retrieval, a seven-stage pipeline for typed, lay
 
 Our most striking finding is that naive vector search (69.3\%) outperforms vanilla RAG (59.3\%) on this typed knowledge base, revealing that the \emph{typed ontology}---well-curated entity descriptions, explicit type assignments, and semantic layer organization---is the primary quality driver. The typed retrieval stages provide an additional 6.7pp lift, meaningful but secondary to the ontology's contribution.
 
-Stage-by-stage ablation reveals no individually significant stage contributions on this dense knowledge base (all $p > 0.43$), though graph traversal shows a consistent directional positive effect ($-4.0$pp when removed) and is the only stage whose removal also degrades stability (82\% vs.\ 96\%). Intent classification shows a directional negative effect, consistent with the hypothesis that typed stages are density-dependent, though validation at other scales is needed. Gap detection fires on 80\% of questions, producing 62 curation signals per evaluation independently of answer quality---an observability mechanism that feeds back into the knowledge curation cycle.
+Stage-by-stage ablation reveals no individually significant stage contributions on this dense knowledge base (all $p > 0.43$), though graph traversal shows the largest directional positive effect ($-4.0$pp when removed, $p = 0.451$) and is the only stage whose removal also degrades stability (82\% vs.\ 96\%). Intent classification shows a directional negative effect ($+4.0$pp when removed, $p = 0.431$), consistent with the hypothesis that typed stages are density-dependent, though these effects are not statistically distinguishable from zero at this sample size and require validation at other scales. Gap detection fires on 80\% of questions, producing 62 curation signals per evaluation independently of answer quality---an observability mechanism that feeds back into the knowledge curation cycle.
 
-The synthesis bottleneck---the finding that context content richness dominates retrieval strategy as a quality determinant---has practical implications: investments in knowledge base curation depth may yield larger returns than investments in retrieval pipeline sophistication. Our results suggest that for practitioners working with typed knowledge bases, building a well-curated ontology is the higher-leverage first step.
+We propose the \emph{synthesis bottleneck hypothesis}: on well-curated knowledge bases, context content richness may dominate retrieval strategy as a quality determinant. While our experiment does not isolate this effect in a controlled ablation, the pattern is suggestive---the simplest retrieval method on rich typed content (69.3\%) outperforms a more complex method (59.3\%), and the full pipeline adds only a modest further lift (76.0\%). For practitioners working with typed knowledge bases, building a well-curated ontology appears to be the higher-leverage first step; layering typed retrieval on top provides meaningful but diminishing returns.
 
 Future work includes (1)~validating the density hypothesis by evaluating DCR on structurally different knowledge bases of varying size and density---partitioning the current 410-entity KB would test size but not structural diversity, so evaluation on additional domains (e.g., fintech operations, supply chain logistics) is needed, (2)~scaling to 200+ questions with human-calibrated scoring rubrics, (3)~evaluating on production knowledge bases with higher MISSING rates to test the thin-coverage gap detection mechanism, and (4)~multi-model evaluation to reduce dependence on single-judge scoring. In practice, our results suggest teams should first invest in building a typed ontology with rich entity descriptions, then layer typed retrieval on top---the ontology is the foundation, the pipeline is the refinement.
 
@@ -816,7 +818,7 @@ D.~Edge, H.~Trinh, N.~Cheng, J.~Bradley, A.~Chao, A.~Mody, S.~Truitt, and J.~Lar
 \newblock \emph{arXiv preprint arXiv:2404.16130}, 2024.
 
 \bibitem[Hu et~al.(2024)]{hu2024grag}
-Z.~Hu, Z.~Xu, G.~Qi, and K.~Wang.
+Y.~Hu, Z.~Lei, Z.~Zhang, B.~Pan, C.~Ling, and L.~Zhao.
 \newblock {GRAG}: Graph retrieval-augmented generation.
 \newblock \emph{arXiv preprint arXiv:2405.16506}, 2024.
 
@@ -846,7 +848,7 @@ P.~Rajpurkar, R.~Jia, and P.~Liang.
 \newblock In \emph{ACL}, 2018.
 
 \bibitem[Sarmah et~al.(2024)]{sarmah2024hybridrag}
-B.~Sarmah, B.~Hall, R.~Rao, S.~Patel, S.~Pasupuleti, and M.~Kulkarni.
+B.~Sarmah, B.~Hall, R.~Rao, S.~Patel, S.~Pasquali, and D.~Mehta.
 \newblock {HybridRAG}: Integrating knowledge graphs and vector retrieval augmented generation for efficient information extraction.
 \newblock \emph{arXiv preprint arXiv:2408.04948}, 2024.
 
